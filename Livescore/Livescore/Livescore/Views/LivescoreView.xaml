@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Livescore.ViewModels"
+             mc:Ignorable="d"
+             BackgroundColor="White"
+             x:Class="Livescore.Views.LivescoreView">
+
+    <ContentPage.BindingContext>
+
+        <vm:LivescoreViewModel
+            />
+
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        
+        <StackLayout
+            Padding="15"
+            >
+
+            <Label
+                FontAttributes="Bold"
+                FontSize="Large"
+                HorizontalOptions="CenterAndExpand"
+                Text="Partidos de hoy"
+                TextColor="Black"
+                />
+
+            <CollectionView
+                HorizontalOptions="FillAndExpand"
+                ItemsSource="{Binding Matches}"
+                SelectionMode="None"
+                VerticalOptions="FillAndExpand"
+                >
+
+                <CollectionView.ItemsLayout>
+
+                    <LinearItemsLayout
+                        ItemSpacing="5"
+                        Orientation="Vertical"
+                        />
+
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+
+                    <DataTemplate>
+
+                        <Frame
+                            HasShadow="False"
+                            >
+
+                            <StackLayout
+                                HorizontalOptions="FillAndExpand"
+                                >
+
+                                <Expander
+                                    CollapseAnimationEasing="{x:Static Easing.SpringOut}"
+                                    CollapseAnimationLength="500"
+                                    ExpandAnimationEasing="{x:Static Easing.SpringIn}"
+                                    ExpandAnimationLength="500"
+                                    >
+
+                                    <Expander.Header>
+
+                                        <Grid
+                                            ColumnDefinitions="*, *, *"
+                                            ColumnSpacing="0"
+                                            >
+
+                                            <StackLayout
+                                                BackgroundColor="#faf5f5"
+                                                Grid.Column="0"
+                                                Padding="15"
+                                                >
+
+                                                <Image
+                                                    HeightRequest="35"
+                                                    WidthRequest="35"
+                                                    >
+
+                                                    <Image.Source>
+
+                                                        <UriImageSource
+                                                            Uri="{Binding HomeTeamImageUrl}"
+                                                            />
+
+                                                    </Image.Source>
+                                                    
+                                                </Image>
+
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    HorizontalOptions="CenterAndExpand"
+                                                    Text="{Binding HomeTeam}"
+                                                    TextColor="Black"
+                                                    />
+
+                                            </StackLayout>
+
+                                            <StackLayout
+                                                BackgroundColor="LightYellow"
+                                                Grid.Column="1"
+                                                Padding="15"
+                                                >
+
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="Large"
+                                                    HorizontalOptions="CenterAndExpand"
+                                                    Text="{Binding Time, StringFormat='{0}\''}"
+                                                    TextColor="Green"
+                                                    />
+
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="Small"
+                                                    HorizontalOptions="CenterAndExpand"
+                                                    Text="{Binding Score}"
+                                                    TextColor="Black"
+                                                    />
+
+                                            </StackLayout>
+
+                                            <StackLayout
+                                                BackgroundColor="#faf5f5"
+                                                Grid.Column="2"
+                                                Padding="15"
+                                                >
+
+                                                <Image
+                                                    HeightRequest="35"
+                                                    WidthRequest="35"
+                                                    >
+
+                                                    <Image.Source>
+
+                                                        <UriImageSource
+                                                            Uri="{Binding AwayTeamImageUrl}"
+                                                            />
+
+                                                    </Image.Source>
+
+                                                </Image>
+
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    HorizontalOptions="CenterAndExpand"
+                                                    Text="{Binding AwayTeam}"
+                                                    TextColor="Black"
+                                                    />
+
+                                            </StackLayout>
+
+                                        </Grid>
+                                        
+                                    </Expander.Header>
+
+                                    <Grid
+                                        HeightRequest="260"
+                                        RowDefinitions="*, *"
+                                        RowSpacing="0"
+                                        VerticalOptions="Start"
+                                        >
+
+                                        <ListView
+                                            BackgroundColor="LightYellow"
+                                            ItemsSource="{Binding Stats}"
+                                            SelectionMode="None"
+                                            SeparatorVisibility="None"
+                                            VerticalOptions="Start"
+                                            VerticalScrollBarVisibility="Never"
+                                            >
+
+                                            <ListView.ItemTemplate>
+
+                                                <DataTemplate>
+
+                                                    <ViewCell>
+
+                                                        <Grid
+                                                            ColumnDefinitions="*, *, *"
+                                                            VerticalOptions="CenterAndExpand"
+                                                            >
+
+                                                            <Label
+                                                                FontSize="Small"
+                                                                Grid.Column="1"
+                                                                HorizontalOptions="CenterAndExpand"
+                                                                Text="{Binding HomeValue}"
+                                                                VerticalOptions="CenterAndExpand"
+                                                                />
+
+                                                            <Label
+                                                                FontAttributes="Bold"
+                                                                FontSize="Small"
+                                                                Grid.Column="0"
+                                                                HorizontalOptions="CenterAndExpand"
+                                                                Text="{Binding StatName}"
+                                                                VerticalOptions="CenterAndExpand"
+                                                                />
+
+                                                            <Label
+                                                                FontSize="Small"
+                                                                Grid.Column="2"
+                                                                HorizontalOptions="CenterAndExpand"
+                                                                Text="{Binding AwayValue}"
+                                                                VerticalOptions="CenterAndExpand"
+                                                                />
+
+                                                        </Grid>
+                                                        
+                                                    </ViewCell>
+                                                    
+                                                </DataTemplate>
+                                                
+                                            </ListView.ItemTemplate>
+                                            
+                                        </ListView>
+
+                                        <StackLayout
+                                            BackgroundColor="LightYellow"
+                                            Grid.Row="1"
+                                            Padding="15"
+                                            >
+
+                                            <Label
+                                                FontAttributes="Bold"
+                                                Text="Información"
+                                                TextColor="Black"
+                                                />
+
+                                            <Label
+                                                Text="{Binding Info}"
+                                                TextColor="Black"
+                                                />
+
+                                        </StackLayout>
+                                        
+                                    </Grid>
+                                    
+                                </Expander>
+                                
+                            </StackLayout>
+                            
+                        </Frame>
+                        
+                    </DataTemplate>
+                    
+                </CollectionView.ItemTemplate>
+                
+            </CollectionView>
+
+        </StackLayout>
+        
+    </ContentPage.Content>
+</ContentPage>
